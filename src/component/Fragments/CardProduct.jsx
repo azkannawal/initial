@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import Button from "../Elements/Button";
 
@@ -39,7 +38,7 @@ const Footer = (props) => {
   return (
     <div className="flex items-center justify-between px-5 pb-5">
       <span className="text-2xl font-bold text-white">Rp {price.toLocaleString('id-ID', {styles: 'currency', currency: 'IDR'})}</span>
-      <Button variant="bg-blue-800" onClick={() => handleAddToCart(id)}>Add to cart</Button>
+      <Button modify="bg-gray-900" onClick={() => handleAddToCart(id)}>Add to cart</Button>
     </div>
   );
 };
