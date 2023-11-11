@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import CardProduct from "./../component/Fragments/CardProduct";
 import Button from "./../component/Elements/Button/index";
 
@@ -32,7 +32,7 @@ const ProductPage = () => {
   }, []);
 
   useEffect(() => {
-    if(cart.length > 0) {
+    if (cart.length > 0) {
       const sum = cart.reduce((acc, item) => {
         const product = products.find((product) => product.id === item.id);
         return acc + product.price * item.qty;
@@ -59,6 +59,23 @@ const ProductPage = () => {
       setCart([...cart, { id, qty: 1 }]);
     }
   };
+
+  //useRef sebagai alternatif useState, namun tidak auto rerender
+  const cartRef = useRef(JSON.parse(localStorage.getItem("cart")));
+  const handleAddToCartRef = (id) => {
+    cartRef.current = [...cartRef.current, { id, qty: 1 }];
+    localStorage.setItem("cart", JSON.stringify(cartRef.current));
+  };
+
+  const totalPriceRef = useRef(null);
+
+  useEffect(() => {
+    if (cart.length > 0) {
+      totalPriceRef.current.style.display = "table-row";
+    } else {
+      totalPriceRef.current.style.display = "none";
+    }
+  }, [cart]);
 
   return (
     <>
@@ -124,7 +141,7 @@ const ProductPage = () => {
                 </tr>
               );
             })}
-            <tr>
+            <tr ref={totalPriceRef}>
               <td colSpan={3} className="text-left px-6 py-3">
                 Total Price
               </td>
