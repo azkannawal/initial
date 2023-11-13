@@ -7,11 +7,16 @@ import RegisterPage from "./pages/register.jsx";
 import ErrorPage from "./pages/error.jsx";
 import ProductPage from "./pages/product.jsx";
 import ProfilePage from "./pages/profile.jsx";
+import DetailProductPage from "./pages/detail.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div className="flex justify-center items-center h-screen text-6xl">Halo Dunia!</div>,
+    element: (
+      <div className="flex justify-center items-center h-screen text-6xl">
+        Halo Dunia!
+      </div>
+    ),
     errorElement: <ErrorPage />,
   },
   {
@@ -29,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "/profile",
     element: <ProfilePage />,
+  },
+  {
+    path: "/product/:id", //parameter bebas, bisa name, id
+    element: <DetailProductPage />,
   },
 ]);
 
