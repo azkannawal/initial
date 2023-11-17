@@ -1,7 +1,7 @@
 import { legacy_createStore } from "redux";
 
 //reducer
-const cartReducer = (state = { cart: [{ id: 1, qty: 20 }], }, action) => {
+const cartReducer = (state = { cart: [{ id: 1, qty: 20 }] }, action) => {
   switch (action.type) {
     case "ADD_TO_CART":
       return {
