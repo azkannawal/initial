@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import Button from "../Elements/Button";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/slice/cartSlice";
 
 const CardProduct = (props) => {
   const { children } = props;
@@ -14,7 +16,11 @@ const Header = (props) => {
   const { image, id } = props;
   return (
     <Link to={`/product/${id}`}>
-      <img src={image} alt="product" className="p-8 rounded-t-lg h-72 w-full object-cover" />
+      <img
+        src={image}
+        alt="product"
+        className="p-8 rounded-t-lg h-72 w-full object-cover"
+      />
     </Link>
   );
 };
@@ -34,11 +40,20 @@ const Body = (props) => {
 };
 
 const Footer = (props) => {
-  const { price, handleAddToCart, id } = props;
+  const { price, id } = props;
+  const dispatch = useDispatch();
   return (
     <div className="flex items-center justify-between px-5 pb-5">
-      <span className="text-2xl font-bold text-white">Rp {price.toLocaleString('id-ID', {styles: 'currency', currency: 'IDR'})}</span>
-      <Button modify="bg-gray-900" onClick={() => handleAddToCart(id)}>Add to cart</Button>
+      <span className="text-2xl font-bold text-white">
+        Rp{" "}
+        {price.toLocaleString("id-ID", { styles: "currency", currency: "IDR" })}
+      </span>
+      <Button
+        modify="bg-gray-900"
+        onClick={() => dispatch(addToCart({ id, qty: 1 }))}
+      >
+        Add to cart
+      </Button>
     </div>
   );
 };
